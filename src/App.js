@@ -1,10 +1,14 @@
 import React from "react";
 import Layout from "./layout/Layout";
+import Main from "./components/Main";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
     <Layout>
-      <h1>Birdraft</h1>
+      <Sidebar>Left</Sidebar>
+      <Main>Birdraft</Main>
+      <Sidebar>Right</Sidebar>
     </Layout>
   );
 }
