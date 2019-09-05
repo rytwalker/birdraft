@@ -6,14 +6,21 @@ import CardListItem from "./Card/CardListItem";
 import { TweetContext } from "../App";
 
 function Main({ children }) {
-  const tweets = useContext(TweetContext);
+  const [tweets, setTweets] = useContext(TweetContext);
+
+  function addNewTweet(tweet) {
+    const tweetsCopy = [...tweets];
+    tweetsCopy.push(tweet);
+    setTweets(tweetsCopy);
+  }
+
   console.log(tweets);
   return (
     <StyledMain>
       <MainHeading>
         Birdraft<span>Rank and organize your Twitter drafts</span>
       </MainHeading>
-      <CardForm isForm />
+      <CardForm isForm addNewTweet={addNewTweet} tweetsLenght={tweets.length} />
       {tweets.length &&
         tweets.map(tweet => (
           <CardListItem

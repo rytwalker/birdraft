@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Card } from "../../styles/card";
 import Stars from "../Stars/Stars";
 
-function CardForm({ form }) {
+function CardForm({ addNewTweet, form, tweetsLength }) {
   const [input, setInput] = useState("");
   const [rating, setRating] = useState(0);
   const [limit] = useState(280);
@@ -11,6 +11,12 @@ function CardForm({ form }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const newTweet = {
+      id: parseInt(tweetsLength + 1),
+      tweet: input,
+      rating: rating
+    };
+    addNewTweet(newTweet);
     console.log("Rating: ", rating, "Input: ", input);
     // to-do...
   }

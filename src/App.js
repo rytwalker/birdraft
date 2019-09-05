@@ -14,7 +14,7 @@ function App() {
   }, [tweetDrafts]);
 
   return (
-    <TweetContext.Provider value={tweetDrafts}>
+    <TweetContext.Provider value={[tweetDrafts, setTweetDrafts]}>
       <Layout>
         <Sidebar />
         <Main />
