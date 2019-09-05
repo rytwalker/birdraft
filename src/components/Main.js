@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { MainHeading } from "../styles/headings";
 import CardForm from "./Card/CardForm";
 import CardListItem from "./Card/CardListItem";
+import { TweetContext } from "../App";
 
 function Main({ children }) {
+  const tweets = useContext(TweetContext);
+  console.log(tweets);
   return (
     <StyledMain>
       <MainHeading>
         Birdraft<span>Rank and organize your Twitter drafts</span>
       </MainHeading>
-      <CardForm form />
-      <CardListItem style={{ marginBottom: "1.5rem" }} />
-      <CardListItem />
-      <CardListItem />
+      <CardForm isForm />
+      {tweets.length &&
+        tweets.map(tweet => (
+          <CardListItem
+            key={tweet.id}
+            id={tweet.id}
+            tweet={tweet.tweet}
+            rating={tweet.rating}
+          />
+        ))}
     </StyledMain>
   );
 }
