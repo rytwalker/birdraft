@@ -6,9 +6,9 @@ import Sidebar from "./components/Sidebar";
 function App() {
   return (
     <Layout>
-      <Sidebar>Left</Sidebar>
-      <Main>Birdraft</Main>
-      <Sidebar>Right</Sidebar>
+      <Sidebar />
+      <Main />
+      <Sidebar />
     </Layout>
   );
 }

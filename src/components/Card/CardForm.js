@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import Card from "./Card";
 import Stars from "../Stars/Stars";
 
-function CardForm() {
+function CardForm({ form }) {
   const [input, setInput] = useState("");
+  const [rating, setRating] = useState(0);
   const [limit] = useState(280);
   const [inputLength, setInputLength] = useState(input.length);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("Rating: ", rating, "Input: ", input);
+    // to-do...
+  }
 
   // update length when input changes
   useEffect(() => {
@@ -13,31 +21,33 @@ function CardForm() {
   }, [input]);
 
   return (
-    <StyledCardForm>
-      <div className="main">
-        <div className="img" />
-        <textarea
-          name="tweet"
-          id="tweet"
-          className="tweet"
-          placeholder="Type draft..."
-          value={input}
-          onChange={e => setInput(e.target.value)}
-        ></textarea>
-        <CharCounter
-          warning={inputLength > limit - 21 && inputLength < limit}
-          over={inputLength >= limit}
-        >
-          {inputLength}/{limit}
-        </CharCounter>
-      </div>
-      <footer className="footer">
-        <div className="ranking">
-          <Stars />
+    <Card form={form}>
+      <StyledCardForm onSubmit={handleSubmit}>
+        <div className="main">
+          <div className="img" />
+          <textarea
+            name="tweet"
+            id="tweet"
+            className="tweet"
+            placeholder="Type draft..."
+            value={input}
+            onChange={e => setInput(e.target.value)}
+          ></textarea>
+          <CharCounter
+            warning={inputLength > limit - 21 && inputLength < limit}
+            over={inputLength >= limit}
+          >
+            {inputLength}/{limit}
+          </CharCounter>
         </div>
-        <Button>Save</Button>
-      </footer>
-    </StyledCardForm>
+        <footer className="footer">
+          <div className="ranking">
+            <Stars setRating={setRating} />
+          </div>
+          <Button>Save</Button>
+        </footer>
+      </StyledCardForm>
+    </Card>
   );
 }
 

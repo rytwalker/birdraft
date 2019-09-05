@@ -1,20 +1,22 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
 import Star from "./Star";
 
-function Stars({ activeStars = 0, isSmall }) {
+function Stars({ activeStars = 0, isSmall, setRating = null }) {
   const [numOfStars] = useState(5);
   const [numOfActiveStars, setNumOfActiveStars] = useState(activeStars);
   const [numOfHoverStars, setNumOfHoverStars] = useState(0);
-
-  // function handleReset() {
-  //   setNumOfActiveStars(0);
-  // }
 
   const starArr = [];
   for (let i = 0; i < numOfStars; i++) {
     starArr.push(i);
   }
+
+  useEffect(() => {
+    if (setRating) {
+      setRating(numOfActiveStars);
+    }
+  }, [numOfActiveStars]);
+
   return (
     <div>
       {starArr.map(s => (
@@ -28,16 +30,8 @@ function Stars({ activeStars = 0, isSmall }) {
           isSmall={isSmall}
         />
       ))}
-      {/* {!isSmall && <ResetButton onClick={handleReset}>Reset</ResetButton>} */}
     </div>
   );
 }
-
-// const ResetButton = styled.button`
-//   cursor: pointer;
-//   background: transparent;
-//   border: none;
-//   text-align: left;
-// `;
 
 export default Stars;
